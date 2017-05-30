@@ -9,6 +9,8 @@ import {
 import UserList from './src/components/UserList';
 import getUsers from './src/util/getUsers';
 
+import { NativeRouter, Route, Link } from 'react-router-native'
+
 export default class stellar_mobile extends Component {
 
   constructor(props) {
@@ -28,9 +30,13 @@ export default class stellar_mobile extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <UserList users={this.state.users} />
-      </View>
+      <NativeRouter>
+        <View style={styles.container}>
+
+
+          <Route exact path="/" render={() => <UserList users={this.state.users}/> }/>
+        </View>
+      </NativeRouter>
     );
   }
 }
