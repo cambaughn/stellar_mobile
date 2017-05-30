@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { NativeRouter, Route, Link } from 'react-router-native';
+import { NativeRouter, Route, Link, Redirect } from 'react-router-native';
 
 
 import UserList from './UserList';
 import Profile from './Profile';
 import BottomNav from './BottomNav';
+import Login from './Login';
 import getUsers from '../util/getUsers';
 
 
@@ -15,9 +16,18 @@ class App extends Component {
     super(props);
 
     this.state = {
-      users: []
+      users: [],
+      currentUser: {},
     }
   }
+
+  loginRedirect() {
+    if (!this.state.currentUser.name) {
+      console.log('redirecting')
+      return <Redirect to='/login' />
+    }
+  }
+
 
   componentDidMount() {
     getUsers.all(users => {
@@ -31,7 +41,9 @@ class App extends Component {
       <NativeRouter>
         <View style={styles.container}>
 
+          { this.loginRedirect() }
           <Route exact path='/' render={() => <UserList users={this.state.users} /> }/>
+          <Route path='/login' component={Login} />
           <Route path='/search' render={() => <UserList users={this.state.users} /> }/>
           <Route path='/profile' component={Profile} />
 
@@ -42,6 +54,8 @@ class App extends Component {
     );
   }
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
