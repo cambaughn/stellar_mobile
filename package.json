@@ -7,10 +7,14 @@
     "test": "jest"
   },
   "dependencies": {
+    "deepfreeze": "^2.0.0",
+    "expect": "^1.20.2",
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.2",
     "react-native-facebook-login": "^1.5.0",
-    "react-router-native": "^4.1.1"
+    "react-redux": "^5.0.5",
+    "react-router-native": "^4.1.1",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "babel-jest": "20.0.3",
