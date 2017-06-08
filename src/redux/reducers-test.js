@@ -1,40 +1,8 @@
-
-import { createStore, combineReducers } from 'redux'
 import expect, { createSpy, spyOn, isSpy } from 'expect';
 let deepfreeze = require('deepfreeze');
 
-function currentUser(state = {}, action) {
-  switch (action.type) {
-    case 'UPDATE_USER':
-      return action.user;
-    default:
-      return state;
-  }
-}
-
-
-function questions(state = [], action) {
-  switch (action.type) {
-    case 'SET_QUESTIONS':
-      return action.questions;
-    default:
-      return state;
-  }
-}
-
-const stellarApp = combineReducers({
-  currentUser,
-  questions
-});
-
-
-
-const store = createStore(stellarApp);
-
-// Tests
-
-
-
+import { currentUser, questions, users } from './reducers';
+import store from './store';
 
 function testCurrentUser() {
   let userBefore = {};
@@ -64,9 +32,22 @@ function testQuestions() {
   expect(questions(stateBefore, action)).toEqual(stateAfter);
 }
 
+function testUsers() {
+  let stateBefore = [];
+  let action = { type: 'SET_USERS', users: [{ id: 1 }, { id: 2 }]};
+  let stateAfter = [{ id: 1 }, { id: 2 }];
+
+  deepfreeze(stateBefore);
+  deepfreeze(action);
+
+  expect(users(stateBefore, action))
+  .toEqual(stateAfter);
+}
+
 
 testCurrentUser();
 testQuestions();
+testUsers();
 console.log('All tests passed');
 
 console.log(`State =>`, store.getState());

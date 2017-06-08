@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
@@ -9,13 +10,12 @@ import {
 import App from './src/components/App';
 
 
-export default class stellar_mobile extends Component {
-
-  render() {
-    return (
-      <App />
-    );
-  }
+const stellar_mobile = () => {
+  return (
+    <App />
+  );
 }
 
+
+export default stellar_mobile;
 AppRegistry.registerComponent('stellar_mobile', () => stellar_mobile);
