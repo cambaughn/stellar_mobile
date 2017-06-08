@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Route, Link, Redirect } from 'react-router-native';
+import { Provider } from 'react-redux';
 
 
 import UserList from './UserList';
@@ -9,6 +10,7 @@ import BottomNav from './BottomNav';
 import Login from './Login';
 import getUsers from '../util/getUsers';
 
+import store from '../redux/store';
 
 class App extends Component {
 
