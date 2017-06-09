@@ -9,7 +9,7 @@ const UserList = ({ users }) => {
   return (
     <View>
       { users.map(user => {
-        return <Text key={user.id}> {`${user.firstName} ${user.lastName}`} </Text>
+        return <Text key={user.id}> {user.name} </Text>
       })}
     </View>
   )

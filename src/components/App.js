@@ -10,31 +10,38 @@ import BottomNav from './BottomNav';
 import Login from './Login';
 import getUsers from '../util/getUsers';
 
-import store from '../redux/store';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
+    console.log(this.props.store.getState())
 
-    this.state = {
-      users: [],
-      currentUser: {},
-    }
+    this.getUsers = this.getUsers.bind(this);
+
+    this.props.store.subscribe(this.forceUpdate.bind(this))
   }
 
   loginRedirect() {
-    if (!this.state.currentUser.name) {
+    if (!this.store.getState().currentUser.name) {
       console.log('redirecting')
       return <Redirect to='/login' />
     }
   }
 
+  getUsers() {
+    return this.props.store.getState().users;
+  }
+
 
   componentDidMount() {
     getUsers.all(users => {
-      this.setState({ users });
+      this.props.store.dispatch({ type: 'SET_USERS', users: users });
     })
+  }
+
+  setUsers(users) {
+
   }
 
 
@@ -43,11 +50,10 @@ class App extends Component {
       <NativeRouter>
         <View style={styles.container}>
 
-          { this.loginRedirect() }
-          <Route exact path='/' render={() => <UserList users={this.state.users} /> }/>
-          <Route path='/login' component={Login} />
-          <Route path='/search' render={() => <UserList users={this.state.users} /> }/>
-          <Route path='/profile' component={Profile} />
+          <Route exact path='/' render={() => <UserList users={this.getUsers()} /> }/>
+          {/* <Route path='/login' component={Login} />
+            <Route path='/search' render={() => <UserList users={this.store.getState().users} /> }/>
+          <Route path='/profile' component={Profile} /> */}
 
           <BottomNav />
 
@@ -56,7 +62,6 @@ class App extends Component {
     );
   }
 }
-
 
 
 const styles = StyleSheet.create({

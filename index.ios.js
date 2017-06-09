@@ -1,3 +1,6 @@
+// Ignore Remote Debugger warning
+console.ignoredYellowBox = ['Remote debugger'];
+
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -5,13 +8,17 @@ import {
   Text,
   View
 } from 'react-native';
+import { Provider } from 'react-redux';
+
+import store from './src/redux/store';
 
 import App from './src/components/App';
 
 
+
 const stellar_mobile = () => {
   return (
-    <App />
+    <App store={store} />
   );
 }
 
