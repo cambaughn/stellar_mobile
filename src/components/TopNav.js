@@ -6,18 +6,10 @@ import stylePresets from '../util/stylePresets';
 
 
 
-const BottomNav = () => {
+const TopNav = () => {
   return (
     <View style={styles.container}>
-      <Link to='/' underlayColor='white'>
-        <Text>Home</Text>
-      </Link>
-      <Link to='/search' underlayColor='white'>
-        <Text>Search</Text>
-      </Link>
-      <Link to='/profile' underlayColor='white'>
-        <Text>Profile</Text>
-      </Link>
+      <Text>stellar</Text>
     </View>
   )
 }
@@ -25,26 +17,27 @@ const BottomNav = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 60,
+    height: 40,
     width: '100%',
 
     position: 'absolute',
-    bottom: 0,
+    top: 10,
     left: 0,
 
-    borderTopWidth: 1,
+    borderBottomWidth: 1,
     borderColor: '#ecf0f1',
 
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-
-    paddingLeft: 40,
-    paddingRight: 40,
+    justifyContent: 'center',
 
     zIndex: 1,
+
+    // paddingLeft: 40,
+    // paddingRight: 40,
+    // marginBottom: 100,
   }
 })
 
-export default BottomNav;
+export default TopNav;

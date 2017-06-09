@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { NativeRouter, Route, Link, Redirect } from 'react-router-native';
-import { Provider } from 'react-redux';
+import { NativeRouter, Route, Link, Redirect, Switch } from 'react-router-native';
 
 
 import UserList from './UserList';
+import Home from './Home';
 import Profile from './Profile';
 import BottomNav from './BottomNav';
+import TopNav from './TopNav';
 import Login from './Login';
+import Search from './Search';
+
 import getUsers from '../util/getUsers';
 
 
@@ -15,10 +18,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    console.log(this.props.store.getState())
-
     this.getUsers = this.getUsers.bind(this);
-
     this.props.store.subscribe(this.forceUpdate.bind(this))
   }
 
@@ -33,6 +33,10 @@ class App extends Component {
     return this.props.store.getState().users;
   }
 
+  getQuestions() {
+    return this.props.store.getState().questions;
+  }
+
 
   componentDidMount() {
     getUsers.all(users => {
@@ -40,23 +44,22 @@ class App extends Component {
     })
   }
 
-  setUsers(users) {
-
-  }
-
 
   render() {
     return (
       <NativeRouter>
         <View style={styles.container}>
+          <TopNav />
+          <Switch>
+            <Route exact path='/' render={() => <Home questions={this.getQuestions()} /> }/>
+            <Route path='/search' render={() => <Search users={this.getUsers()} /> }/>
 
-          <Route exact path='/' render={() => <UserList users={this.getUsers()} /> }/>
-          {/* <Route path='/login' component={Login} />
-            <Route path='/search' render={() => <UserList users={this.store.getState().users} /> }/>
-          <Route path='/profile' component={Profile} /> */}
+            {/* <Route path='/login' component={Login} />
+              <Route path='/search' render={() => <UserList users={this.store.getState().users} /> }/>
+            <Route path='/profile' component={Profile} /> */}
+          </Switch>
 
           <BottomNav />
-
         </View>
       </NativeRouter>
     );
@@ -67,8 +70,6 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: 'white',
   },
 });
