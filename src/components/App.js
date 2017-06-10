@@ -12,6 +12,8 @@ import Login from './Login';
 import Search from './Search';
 
 import getUsers from '../util/getUsers';
+import { getAllQuestions } from '../util/getQuestions';
+import { setUsers, setQuestions } from '../redux/actionCreators';
 
 
 class App extends Component {
@@ -41,6 +43,10 @@ class App extends Component {
   componentDidMount() {
     getUsers.all(users => {
       this.props.store.dispatch({ type: 'SET_USERS', users: users });
+    })
+
+    getAllQuestions(questions => {
+      this.props.store.dispatch(setQuestions(questions));
     })
   }
 

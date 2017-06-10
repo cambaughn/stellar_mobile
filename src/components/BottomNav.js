@@ -25,7 +25,7 @@ const BottomNav = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 60,
+    height: 50,
     width: '100%',
 
     position: 'absolute',
