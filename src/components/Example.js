@@ -11,6 +11,12 @@ const Example = () => {
 
 export default Example;
 
+const styles = StyleSheet.create({
+  container: {
+
+  },
+})
+
 
 // OR
 

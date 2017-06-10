@@ -17,15 +17,17 @@ const TopNav = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 40,
+    height: 50,
     width: '100%',
 
     position: 'absolute',
-    top: 10,
+    top: 0,
     left: 0,
+    paddingTop: 10,
 
     borderBottomWidth: 1,
     borderColor: '#ecf0f1',
+    backgroundColor: 'white',
 
     display: 'flex',
     flexDirection: 'row',

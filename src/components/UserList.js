@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+
+import UserListItem from './UserListItem';
 
 
 const UserList = ({ users }) => {
   return (
-    <View>
+    <ScrollView style={styles.container}>
       { users.map(user => {
-        return <Text key={user.id}> {user.name} </Text>
+        return <UserListItem key={user.id} user={user} />
       })}
-    </View>
+    </ScrollView>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    marginTop: 50,
+  },
+})
 
 export default UserList;
