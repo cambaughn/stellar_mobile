@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View } from 'react-native';
 
+import UnansweredQuestion from './UnansweredQuestion';
+
 
 const QuestionList = ({ questions }) => {
   return (
     <View>
       { questions.map(question => {
-        return <Text key={question.id}> {question.text} </Text>
+        return <UnansweredQuestion key={question.id} question={question} />
       })}
     </View>
   )
