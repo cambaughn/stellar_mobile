@@ -1,19 +1,9 @@
-
-const baseUrl = 'http://localhost:1337';
+import { get } from './getPostMethods';
 
 const getUsers = {};
 
 getUsers.all = (callback) => {
-  fetch(`${baseUrl}/users`)
-    .then(users => {
-      return users.json();
-    })
-    .then(users => {
-      callback(users);
-    })
-    .catch(error => {
-      console.log(`ERROR => ${error}`);
-    })
+  get('/users', callback);
 }
 
 
