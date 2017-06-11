@@ -6,7 +6,9 @@ import { NativeRouter, Route, Link, Redirect } from 'react-router-native';
 const UnansweredQuestion = ({ question }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.bold}>{question.answerer.name}</Text>
+      <Link to={`/user/${question.asker.name}`} style={styles.link}>
+        <Text style={styles.bold}>{question.answerer.name}</Text>
+      </Link>
       <Text>{question.text}</Text>
       <Text>- {question.asker.name}</Text>
     </View>
@@ -28,6 +30,9 @@ const styles = StyleSheet.create({
 
   bold: {
     fontWeight: 'bold',
+  },
+
+  link: {
   },
 })
 

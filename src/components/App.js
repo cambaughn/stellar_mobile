@@ -5,11 +5,11 @@ import { NativeRouter, Route, Link, Redirect, Switch } from 'react-router-native
 
 import UserList from './UserList';
 import Home from './Home';
-import Profile from './Profile';
 import BottomNav from './BottomNav';
 import TopNav from './TopNav';
 import Login from './Login';
 import Search from './Search';
+import UserProfileContainer from './UserProfileContainer';
 
 import getUsers from '../util/getUsers';
 import { getAllQuestions } from '../util/getQuestions';
@@ -60,9 +60,10 @@ class App extends Component {
             <Route exact path='/' render={() => <Home questions={this.getQuestions()} /> }/>
             <Route path='/search' render={() => <Search users={this.getUsers()} /> }/>
 
+            <Route path='/user/:userId' render={({ match }) =>  <UserProfileContainer match={match} store={this.props.store} /> } />
+
             {/* <Route path='/login' component={Login} />
-              <Route path='/search' render={() => <UserList users={this.store.getState().users} /> }/>
-            <Route path='/profile' component={Profile} /> */}
+            <Route path='/search' render={() => <UserList users={this.store.getState().users} /> }/>            */}
           </Switch>
 
           <BottomNav />
