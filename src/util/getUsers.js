@@ -2,9 +2,13 @@ import { get } from './getPostMethods';
 
 const getUsers = {};
 
-getUsers.all = (callback) => {
+function getAllUsers(callback) {
   get('/users', callback);
 }
 
+function getUserById(userId, callback) {
+  get(`/users${userId}`, callback);
+}
 
-export default getUsers;
+
+export { getAllUsers, getUserById };
