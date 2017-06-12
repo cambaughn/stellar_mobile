@@ -6,7 +6,7 @@ import stylePresets from '../util/stylePresets';
 
 
 
-const BottomNav = () => {
+const BottomNav = ({ currentUser }) => {
   return (
     <View style={styles.container}>
       <Link to='/' underlayColor='white'>
@@ -15,7 +15,7 @@ const BottomNav = () => {
       <Link to='/search' underlayColor='white'>
         <Text>Search</Text>
       </Link>
-      <Link to='/profile' underlayColor='white'>
+      <Link to={`/user/${currentUser.id}`} underlayColor='white'>
         <Text>Profile</Text>
       </Link>
     </View>

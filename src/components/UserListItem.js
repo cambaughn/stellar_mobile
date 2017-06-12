@@ -6,7 +6,9 @@ import { Link } from 'react-router-native';
 const UserListItem = ({ user }) => {
   return (
     <View style={styles.container}>
-      <Text>{user.name}</Text>
+      <Link to={`/user/${user.id}`} style={styles.link}>
+        <Text>{user.name}</Text>
+      </Link>
     </View>
   )
 }
@@ -18,6 +20,13 @@ const styles = StyleSheet.create({
 
     // borderBottomWidth: 1,
     // borderColor: '#ecf0f1',
+  },
+
+  bold: {
+    fontWeight: 'bold',
+  },
+
+  link: {
   },
 })
 

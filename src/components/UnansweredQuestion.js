@@ -10,7 +10,9 @@ const UnansweredQuestion = ({ question }) => {
         <Text style={styles.bold}>{question.answerer.name}</Text>
       </Link>
       <Text>{question.text}</Text>
-      <Text>- {question.asker.name}</Text>
+      <Link to={`/user/${question.asker.id}`} style={styles.link}>
+        <Text>- {question.asker.name}</Text>
+      </Link>
     </View>
   )
 }

@@ -7,7 +7,7 @@ function getAllUsers(callback) {
 }
 
 function getUserById(userId, callback) {
-  get(`/users${userId}`, callback);
+  get(`/user/${userId}`, callback);
 }
 
 

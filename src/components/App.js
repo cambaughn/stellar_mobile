@@ -39,6 +39,10 @@ class App extends Component {
     return this.props.store.getState().questions;
   }
 
+  getCurrentUser() {
+    return this.props.store.getState().currentUser;
+  }
+
 
   componentDidMount() {
     getAllUsers(users => {
@@ -66,7 +70,7 @@ class App extends Component {
             <Route path='/search' render={() => <UserList users={this.store.getState().users} /> }/>            */}
           </Switch>
 
-          <BottomNav />
+          <BottomNav currentUser={this.getCurrentUser()}  />
         </View>
       </NativeRouter>
     );

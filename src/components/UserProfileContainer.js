@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Link } from 'react-router-native';
 
 import UserProfile from './UserProfile';
-import { getAllUsers } from '../util/getUsers';
+import { getUserById } from '../util/getUsers';
 
 
 class UserProfileContainer extends Component {
@@ -13,6 +13,8 @@ class UserProfileContainer extends Component {
     this.state = {
       user: {}
     }
+
+    this.getUser = this.getUser.bind(this)
   }
 
   componentDidMount() {
@@ -20,8 +22,9 @@ class UserProfileContainer extends Component {
   }
 
   getUser(userId) {
-    getAllUsers(userId, (user) => { this.setState({ user })});
+    getUserById(userId, user => this.setState({ user }));
   }
+
 
   render() {
     return (
