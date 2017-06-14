@@ -17,8 +17,7 @@ const QuestionList = ({ questions }) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    paddingTop: 50,
-
+    height: '100%',
     backgroundColor: 'white',
 
   }

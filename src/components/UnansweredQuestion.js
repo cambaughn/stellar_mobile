@@ -6,11 +6,11 @@ import { NativeRouter, Route, Link, Redirect } from 'react-router-native';
 const UnansweredQuestion = ({ question }) => {
   return (
     <View style={styles.container}>
-      <Link to={`/user/${question.answerer.id}`} style={styles.link}>
+      <Link to={`/user/${question.answerer.id}`} style={styles.link} underlayColor='white'>
         <Text style={styles.bold}>{question.answerer.name}</Text>
       </Link>
       <Text>{question.text}</Text>
-      <Link to={`/user/${question.asker.id}`} style={styles.link}>
+      <Link to={`/user/${question.asker.id}`} style={styles.link} underlayColor='white'>
         <Text>- {question.asker.name}</Text>
       </Link>
     </View>
