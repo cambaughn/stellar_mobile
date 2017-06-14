@@ -3,13 +3,13 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Route, Link } from 'react-router-native';
 
 import stylePresets from '../util/stylePresets';
-
+import colors from '../util/colors';
 
 
 const TopNav = () => {
   return (
     <View style={styles.container}>
-      <Text>stellar</Text>
+      <Text style={styles.brand}>stellar</Text>
     </View>
   )
 }
@@ -20,13 +20,12 @@ const styles = StyleSheet.create({
     height: 50,
     width: '100%',
 
-    position: 'absolute',
-    top: 0,
-    left: 0,
+    position: 'relative',
+
     paddingTop: 10,
 
     borderBottomWidth: 1,
-    borderColor: '#ecf0f1',
+    borderColor: colors.lightGrey,
     backgroundColor: 'white',
 
     display: 'flex',
@@ -35,10 +34,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
 
     zIndex: 1,
+  },
 
-    // paddingLeft: 40,
-    // paddingRight: 40,
-    // marginBottom: 100,
+  brand: {
+    color: colors.primary,
+    fontWeight: 'bold',
+    fontSize: 15,
   }
 })
 

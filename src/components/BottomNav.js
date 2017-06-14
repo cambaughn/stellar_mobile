@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Route, Link } from 'react-router-native';
 
 import stylePresets from '../util/stylePresets';
-
+import colors from '../util/colors';
 
 
 const BottomNav = ({ currentUser }) => {
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     left: 0,
 
     borderTopWidth: 1,
-    borderColor: '#ecf0f1',
+    borderColor: colors.lightGrey,
     backgroundColor: 'white',
 
     display: 'flex',
