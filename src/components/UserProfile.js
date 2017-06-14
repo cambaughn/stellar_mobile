@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableHighlight } from 'react-native';
 import { Link } from 'react-router-native';
 
+import QuestionList from './QuestionList';
 import colors from '../util/colors';
 
 
-const UserProfile = ({ user }) => {
+const UserProfile = ({ user, questions }) => {
   return (
     <View style={styles.container}>
       <View style={styles.top}>
@@ -13,10 +14,10 @@ const UserProfile = ({ user }) => {
         <Text style={styles.bio}>{user.bio}</Text>
       </View>
 
-
-      <ScrollView>
-        <Text>Questions go here</Text>
-      </ScrollView>
+      {/* {questions.map(question => {
+        return <Text key={question.id}> {question.text} </Text>
+      })} */}
+      <QuestionList questions={questions} />
     </View>
   )
 }

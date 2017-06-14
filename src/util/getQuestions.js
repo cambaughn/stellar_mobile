@@ -4,4 +4,9 @@ function getAllQuestions(callback) {
   get('/questions', callback);
 }
 
-export { getAllQuestions };
+function getQuestionsByUserId(userId, callback) {
+  console.log('USER ID => ', userId)
+  get(`/questions/${userId}`, callback);
+}
+
+export { getAllQuestions, getQuestionsByUserId };
