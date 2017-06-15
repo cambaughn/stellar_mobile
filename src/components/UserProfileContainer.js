@@ -20,7 +20,8 @@ class UserProfileContainer extends Component {
     this.getQuestions = this.getQuestions.bind(this)
   }
 
-  componentDidMount() {
+  componentWillMount() {
+    console.log('gettin user')
     let userId = this.props.match.params.userId;
     this.getUser(userId);
 

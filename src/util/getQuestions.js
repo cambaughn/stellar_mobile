@@ -5,7 +5,6 @@ function getAllQuestions(callback) {
 }
 
 function getQuestionsByUserId(userId, callback) {
-  console.log('USER ID => ', userId)
   get(`/questions/${userId}`, callback);
 }
 

@@ -1,4 +1,4 @@
-# Stellar Mobile App
+# stellar Mobile App
 
 ## Getting Started
 

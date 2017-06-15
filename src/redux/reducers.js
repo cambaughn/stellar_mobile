@@ -10,6 +10,15 @@ function currentUser(state = {}, action) {
   }
 }
 
+function focusedUser(state = {}, action) {
+  switch (action.type) {
+    case 'UPDATE_FOCUSED_USER':
+      return action.user;
+    default:
+      return state;
+  }
+}
+
 
 function questions(state = [], action) {
   switch (action.type) {
@@ -35,4 +44,4 @@ const stellarApp = combineReducers({
   users
 });
 
-export { currentUser, questions, users, stellarApp };
+export { currentUser, questions, users, focusedUser, stellarApp };
