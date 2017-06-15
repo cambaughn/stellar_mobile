@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Link } from 'react-router-native';
 
 import UserProfile from './UserProfile';
+import AskQuestionModal from './AskQuestionModal';
+
 import { getUserById } from '../util/getUsers';
 import { getQuestionsByUserId } from '../util/getQuestions';
 
@@ -22,6 +24,7 @@ const UserProfileContainer = ({ match, store }) => {
   return (
     <View>
       <UserProfile user={store.getState().focusedUser} questions={store.getState().focusedUserQuestions} />
+      <AskQuestionModal />
     </View>
   )
 }

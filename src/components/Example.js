@@ -9,7 +9,6 @@ const Example = () => {
   )
 }
 
-export default Example;
 
 const styles = StyleSheet.create({
   container: {
@@ -17,6 +16,7 @@ const styles = StyleSheet.create({
   },
 })
 
+export default Example;
 
 // OR
 

@@ -18,7 +18,7 @@ const UserProfile = ({ user, questions }) => {
         </TouchableHighlight>
 
       </View>
-      
+
       <QuestionList questions={questions} />
     </View>
   )
