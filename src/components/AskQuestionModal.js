@@ -5,39 +5,61 @@ import { Link } from 'react-router-native';
 import { postQuestion } from '../util/postQuestion';
 import colors from '../util/colors';
 
-const AskQuestionModal = () => {
-  return (
-    <View>
-      <Modal
-        animationType={"slide"}
-        transparent={false}
-        visible={true}
-      >
-        <View style={styles.container}>
-          <View>
-            <TextInput
-              multiline={true}
-              numberOfLines={4}
-              style={styles.input}
-              placeholder={"Ask a question"}
-              placeholderTextColor={colors.midGrey}
-            />
+class AskQuestionModal extends Component {
 
-            <TouchableHighlight onPress={() => {
-              console.log('sending question')
-            }}
-              style={styles.buttonPrimary}
-              underlayColor={colors.primary}
-            >
-              <Text style={styles.buttonPrimaryText}>Ask</Text>
-            </TouchableHighlight>
+  constructor(props) {
+    super(props);
 
-          </View>
+    this.state = {
+      text: ''
+    }
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleSubmit(text) {
+    console.log('submitting! => ', this.state.text)
+  }
+
+  render() {
+      return (
+        <View>
+          <Modal
+            animationType={"slide"}
+            transparent={false}
+            visible={true}
+          >
+            <View style={styles.container}>
+              <View>
+                <TextInput
+                  multiline={true}
+                  numberOfLines={4}
+                  style={styles.input}
+                  placeholder={"Ask a question"}
+                  placeholderTextColor={colors.midGrey}
+                  autoCapitalize={'sentences'}
+                  autoFocus={true}
+                  returnKeyType={'send'}
+
+                  onChangeText={text => this.setState({ text })}
+                  value={this.state.text}
+                />
+
+                <TouchableHighlight
+                  onPress={this.handleSubmit}
+                  style={styles.buttonPrimary}
+                  underlayColor={colors.primary}
+                >
+                  <Text style={styles.buttonPrimaryText}>Ask</Text>
+                </TouchableHighlight>
+
+              </View>
+            </View>
+          </Modal>
+
         </View>
-      </Modal>
-
-    </View>
-  )
+      )
+  }
 }
 
 
@@ -70,17 +92,20 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
 
     width: Dimensions.get("window").width - 100,
-    height: 30,
+    height: 35,
 
     marginTop: 20,
 
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+
   },
 
   buttonPrimaryText: {
     color: 'white',
+    fontWeight: 'bold',
+    fontSize: 15
   },
 })
 
