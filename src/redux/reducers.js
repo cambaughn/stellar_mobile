@@ -40,6 +40,7 @@ function users(state = [], action) {
 
 const stellarApp = combineReducers({
   currentUser,
+  focusedUser,
   questions,
   users
 });
