@@ -12,11 +12,13 @@ const UserProfile = ({ user, questions }) => {
       <View style={styles.top}>
         <Text style={styles.username}>{user.name}</Text>
         <Text style={styles.bio}>{user.bio}</Text>
-      </View>
 
-      {/* {questions.map(question => {
-        return <Text key={question.id}> {question.text} </Text>
-      })} */}
+        <TouchableHighlight style={styles.buttonPrimary} underlayColor={colors.primary}>
+          <Text style={styles.buttonPrimaryText}>Ask Question</Text>
+        </TouchableHighlight>
+
+      </View>
+      
       <QuestionList questions={questions} />
     </View>
   )
@@ -55,4 +57,21 @@ const styles = StyleSheet.create({
   bio: {
 
   },
+
+  buttonPrimary: {
+    backgroundColor: colors.primary,
+
+    width: '40%',
+    height: 30,
+
+    marginTop: 20,
+
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  buttonPrimaryText: {
+    color: 'white',
+  }
 })
