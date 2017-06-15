@@ -1,7 +1,7 @@
 import expect, { createSpy, spyOn, isSpy } from 'expect';
 let deepfreeze = require('deepfreeze');
 
-import { currentUser, questions, users, focusedUser } from './reducers';
+import { currentUser, questions, users, focusedUser, focusedUserQuestions } from './reducers';
 import store from './store';
 
 function testCurrentUser() {
@@ -27,6 +27,24 @@ function testFocusedUser() {
     .toEqual(userAfter);
 }
 
+
+function testFocusedUserQuestions() {
+  let stateBefore = [];
+  let action = {
+    type: 'SET_FOCUSED_USER_QUESTIONS',
+    questions: [
+      { text: 'Have you heard the tragedy of Darth Plagueis the Wise?'}
+    ]
+  }
+  let stateAfter = [
+    { text: 'Have you heard the tragedy of Darth Plagueis the Wise?'}
+  ]
+
+  deepfreeze(stateBefore);
+  deepfreeze(action);
+
+  expect(focusedUserQuestions(stateBefore, action)).toEqual(stateAfter);
+}
 
 
 function testQuestions() {
@@ -61,8 +79,10 @@ function testUsers() {
 
 testCurrentUser();
 testFocusedUser();
+testFocusedUserQuestions();
 testQuestions();
 testUsers();
+
 console.log('All tests passed');
 
 console.log(`State =>`, store.getState());
