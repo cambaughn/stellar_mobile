@@ -6,14 +6,18 @@ import QuestionList from './QuestionList';
 import colors from '../util/colors';
 
 
-const UserProfile = ({ user, questions }) => {
+const UserProfile = ({ user, questions, toggleModal }) => {
   return (
     <View style={styles.container}>
       <View style={styles.top}>
         <Text style={styles.username}>{user.name}</Text>
         <Text style={styles.bio}>{user.bio}</Text>
 
-        <TouchableHighlight style={styles.buttonPrimary} underlayColor={colors.primary}>
+        <TouchableHighlight
+          style={styles.buttonPrimary}
+          underlayColor={colors.primary}
+          onPress={toggleModal}
+        >
           <Text style={styles.buttonPrimaryText}>Ask Question</Text>
         </TouchableHighlight>
 

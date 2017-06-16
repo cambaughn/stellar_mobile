@@ -17,8 +17,18 @@ class AskQuestionModal extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleSubmit(text) {
-    console.log('submitting! => ', this.state.text)
+  handleSubmit() {
+    if (this.state.text.length > 3) {
+      let question = {
+        text: this.state.text,
+        askerId: this.props.asker.id,
+        answererId: this.props.answerer.id
+      }
+
+      postQuestion(question, console.log);
+      this.props.toggleModal();
+      console.log('submitting! => ', this.state.text);
+    }
   }
 
   render() {
@@ -27,7 +37,7 @@ class AskQuestionModal extends Component {
           <Modal
             animationType={"slide"}
             transparent={false}
-            visible={true}
+            visible={this.props.visible}
           >
             <View style={styles.container}>
               <View>
@@ -35,7 +45,7 @@ class AskQuestionModal extends Component {
                   multiline={true}
                   numberOfLines={4}
                   style={styles.input}
-                  placeholder={"Ask a question"}
+                  placeholder={`Ask a question`}
                   placeholderTextColor={colors.midGrey}
                   autoCapitalize={'sentences'}
                   autoFocus={true}
