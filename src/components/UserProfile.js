@@ -6,20 +6,31 @@ import QuestionList from './QuestionList';
 import colors from '../util/colors';
 
 
-const UserProfile = ({ user, questions, toggleModal }) => {
+const UserProfile = ({ user, questions, toggleModal, handleFollow }) => {
   return (
     <View style={styles.container}>
       <View style={styles.top}>
         <Text style={styles.username}>{user.name}</Text>
         <Text style={styles.bio}>{user.bio}</Text>
 
-        <TouchableHighlight
-          style={styles.buttonPrimary}
-          underlayColor={colors.primary}
-          onPress={toggleModal}
-        >
-          <Text style={styles.buttonPrimaryText}>Ask Question</Text>
-        </TouchableHighlight>
+        <View style={styles.buttonWrapper}>
+          <TouchableHighlight
+            style={[styles.button, styles.buttonPrimary]}
+            underlayColor={colors.primary}
+            onPress={toggleModal}
+          >
+            <Text style={styles.buttonPrimaryText}>Ask Question</Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            style={[styles.button, styles.buttonSecondary]}
+            underlayColor={'white'}
+            onPress={handleFollow}
+          >
+            <Text style={styles.buttonText}>Follow</Text>
+          </TouchableHighlight>
+        </View>
+
 
       </View>
 
@@ -37,7 +48,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: 'pink',
   },
 
   top: {
@@ -52,6 +62,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
 
+  buttonWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
+
   username: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -62,9 +79,7 @@ const styles = StyleSheet.create({
 
   },
 
-  buttonPrimary: {
-    backgroundColor: colors.primary,
-
+  button: {
     width: '40%',
     height: 30,
 
@@ -75,7 +90,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 
+  buttonPrimary: {
+    backgroundColor: colors.primary,
+  },
+
+  buttonSecondary: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: colors.midGrey,
+  },
+
   buttonPrimaryText: {
     color: 'white',
-  }
+  },
+
+  buttonText: {
+
+  },
 })

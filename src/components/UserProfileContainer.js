@@ -7,6 +7,7 @@ import AskQuestionModal from './AskQuestionModal';
 
 import { getUserById } from '../util/getUsers';
 import { getQuestionsByUserId } from '../util/getQuestions';
+import { follow } from '../util/follow';
 
 import { UPDATE_FOCUSED_USER, SET_FOCUSED_USER_QUESTIONS } from '../redux/actionTypes';
 
@@ -21,6 +22,7 @@ class UserProfileContainer extends Component {
     }
 
     this.toggleModal = this.toggleModal.bind(this);
+    this.handleFollow = this.handleFollow.bind(this);
     this.store = this.props.store;
   }
 
@@ -28,11 +30,17 @@ class UserProfileContainer extends Component {
     this.setState({ modalVisible: !this.state.modalVisible });
   }
 
+  handleFollow() {
+    console.log('following')
+    let followerId = this.store.getState().currentUser.id;
+    let followingId = this.store.getState().focusedUser.id;
+    follow(followerId, followingId, console.log);
+  }
+
   render() {
 
     let userId = this.props.match.params.userId;
     if (userId != this.store.getState().focusedUser.id) {
-      console.log('this user => ', userId)
       getUserById(userId, user => this.store.dispatch({ type: UPDATE_FOCUSED_USER, user }) );
       getQuestionsByUserId(userId, questions => this.store.dispatch({ type: SET_FOCUSED_USER_QUESTIONS, questions }));
     }
@@ -43,6 +51,7 @@ class UserProfileContainer extends Component {
           user={this.store.getState().focusedUser}
           questions={this.store.getState().focusedUserQuestions}
           toggleModal={this.toggleModal}
+          handleFollow={this.handleFollow}
         />
         <AskQuestionModal
           visible={this.state.modalVisible}
