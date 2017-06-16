@@ -6,5 +6,10 @@ const follow = (followerId, followingId, callback) => {
   post('/followers/new', followObj, callback);
 }
 
+const isFollowing = (followerId, followingId, callback) => {
+  let checkFollowing = { followerId, followingId };
+  post('/followers/is_following', checkFollowing, callback)
+}
 
-export { follow };
+
+export { follow, isFollowing };

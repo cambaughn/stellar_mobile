@@ -6,7 +6,7 @@ import QuestionList from './QuestionList';
 import colors from '../util/colors';
 
 
-const UserProfile = ({ user, questions, toggleModal, handleFollow }) => {
+const UserProfile = ({ user, questions, toggleModal, handleFollow, following }) => {
   return (
     <View style={styles.container}>
       <View style={styles.top}>
@@ -27,7 +27,7 @@ const UserProfile = ({ user, questions, toggleModal, handleFollow }) => {
             underlayColor={'white'}
             onPress={handleFollow}
           >
-            <Text style={styles.buttonText}>Follow</Text>
+            <Text style={styles.buttonText}>{following ? 'Following' : 'Follow'}</Text>
           </TouchableHighlight>
         </View>
 
