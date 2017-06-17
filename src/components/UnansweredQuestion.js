@@ -6,13 +6,17 @@ import { NativeRouter, Route, Link, Redirect } from 'react-router-native';
 const UnansweredQuestion = ({ question }) => {
   return (
     <View style={styles.container}>
-      <Link to={`/user/${question.answerer.id}`} style={styles.link} underlayColor='white'>
+      {/* <Link to={`/user/${question.answerer.id}`} style={styles.link} underlayColor='white'>
         <Text style={styles.bold}>{question.answerer.name}</Text>
-      </Link>
+      </Link> */}
+      <View style={styles.questionAsker}>
+        <Link to={`/user/${question.asker.id}`} style={styles.link} underlayColor='white'>
+          <Text style={styles.bold}>{question.asker.name}</Text>
+        </Link>
+        <Text> asks:</Text>
+      </View>
+
       <Text>{question.text}</Text>
-      <Link to={`/user/${question.asker.id}`} style={styles.link} underlayColor='white'>
-        <Text>- {question.asker.name}</Text>
-      </Link>
     </View>
   )
 }
@@ -30,11 +34,18 @@ const styles = StyleSheet.create({
     borderColor: '#ecf0f1',
   },
 
+  questionAsker: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start'
+  },
+
   bold: {
     fontWeight: 'bold',
   },
 
   link: {
+    marginBottom: 10
   },
 })
 

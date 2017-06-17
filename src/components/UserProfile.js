@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableHighlight, Dimensions } from 'react-native';
 import { Link } from 'react-router-native';
 
 import PendingQuestionList from './PendingQuestionList';
@@ -10,33 +10,37 @@ import colors from '../util/colors';
 const UserProfile = ({ user, questions, toggleModal, handleFollow, following, isCurrentUser }) => {
   if (isCurrentUser) {
     return (
-      <View style={styles.container}>
-        <View style={styles.top}>
-          <Text style={styles.username}>{user.name}</Text>
-          <Text style={styles.bio}>{user.bio}</Text>
-        </View>
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+        <View style={styles.container}>
+          <View style={styles.top}>
+            <Text style={styles.username}>{user.name}</Text>
+            <Text style={styles.bio}>{user.bio}</Text>
+          </View>
 
-        <PendingQuestionList questions={questions} />
-      </View>
+          <PendingQuestionList questions={questions} />
+        </View>
+      </ScrollView>
     )
   } else {
     return (
-      <View style={styles.container}>
-        <View style={styles.top}>
-          <Text style={styles.username}>{user.name}</Text>
-          <Text style={styles.bio}>{user.bio}</Text>
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+        <View style={styles.container}>
+          <View style={styles.top}>
+            <Text style={styles.username}>{user.name}</Text>
+            <Text style={styles.bio}>{user.bio}</Text>
 
 
-          <UserProfileButtons
-            toggleModal={toggleModal}
-            handleFollow={handleFollow}
-            following={following}
-          />
+            <UserProfileButtons
+              toggleModal={toggleModal}
+              handleFollow={handleFollow}
+              following={following}
+            />
 
+          </View>
+
+          <PendingQuestionList questions={questions} />
         </View>
-
-        <PendingQuestionList questions={questions} />
-      </View>
+      </ScrollView>
     )
   }
 }
@@ -44,6 +48,10 @@ const UserProfile = ({ user, questions, toggleModal, handleFollow, following, is
 export default UserProfile;
 
 const styles = StyleSheet.create({
+  scrollView: {
+    height: Dimensions.get("window").height - 99,
+  },
+
   container: {
     width: '100%',
 
