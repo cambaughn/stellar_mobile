@@ -6,37 +6,50 @@ import QuestionList from './QuestionList';
 import colors from '../util/colors';
 
 
-const UserProfile = ({ user, questions, toggleModal, handleFollow, following }) => {
-  return (
-    <View style={styles.container}>
-      <View style={styles.top}>
-        <Text style={styles.username}>{user.name}</Text>
-        <Text style={styles.bio}>{user.bio}</Text>
-
-        <View style={styles.buttonWrapper}>
-          <TouchableHighlight
-            style={[styles.button, styles.buttonPrimary]}
-            underlayColor={colors.primary}
-            onPress={toggleModal}
-          >
-            <Text style={styles.buttonPrimaryText}>Ask Question</Text>
-          </TouchableHighlight>
-
-          <TouchableHighlight
-            style={[styles.button, styles.buttonSecondary]}
-            underlayColor={'white'}
-            onPress={handleFollow}
-          >
-            <Text style={styles.buttonText}>{following ? 'Following' : 'Follow'}</Text>
-          </TouchableHighlight>
+const UserProfile = ({ user, questions, toggleModal, handleFollow, following, isCurrentUser }) => {
+  if (isCurrentUser) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.top}>
+          <Text style={styles.username}>{user.name}</Text>
+          <Text style={styles.bio}>{user.bio}</Text>
         </View>
 
-
+        <QuestionList questions={questions} />
       </View>
+    )
+  } else {
+    return (
+      <View style={styles.container}>
+        <View style={styles.top}>
+          <Text style={styles.username}>{user.name}</Text>
+          <Text style={styles.bio}>{user.bio}</Text>
 
-      <QuestionList questions={questions} />
-    </View>
-  )
+          <View style={styles.buttonWrapper}>
+            <TouchableHighlight
+              style={[styles.button, styles.buttonPrimary]}
+              underlayColor={colors.primary}
+              onPress={toggleModal}
+            >
+              <Text style={styles.buttonPrimaryText}>Ask Question</Text>
+            </TouchableHighlight>
+
+            <TouchableHighlight
+              style={[styles.button, styles.buttonSecondary]}
+              underlayColor={'white'}
+              onPress={handleFollow}
+            >
+              <Text style={styles.buttonText}>{following ? 'Following' : 'Follow'}</Text>
+            </TouchableHighlight>
+          </View>
+
+
+        </View>
+
+        <QuestionList questions={questions} />
+      </View>
+    )
+  }
 }
 
 export default UserProfile;

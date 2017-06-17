@@ -25,7 +25,7 @@ class AskQuestionModal extends Component {
         answererId: this.props.answerer.id
       }
 
-      postQuestion(question, console.log);
+      postQuestion(question, question => this.props.getData(this.props.answerer.id));
       this.props.toggleModal();
       console.log('submitting! => ', this.state.text);
     }

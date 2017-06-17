@@ -25,6 +25,7 @@ class UserProfileContainer extends Component {
     this.toggleModal = this.toggleModal.bind(this);
     this.handleFollow = this.handleFollow.bind(this);
     this.checkFollowing = this.checkFollowing.bind(this);
+    this.getData = this.getData.bind(this);
     this.store = this.props.store;
   }
 
@@ -35,20 +36,26 @@ class UserProfileContainer extends Component {
   handleFollow() {
     let followerId = this.store.getState().currentUser.id;
     let followingId = this.store.getState().focusedUser.id;
-    follow(followerId, followingId, console.log);
+    follow(followerId, followingId, follow => this.checkFollowing(followerId, followingId));
+
+    this.getData(followingId);
   }
 
   checkFollowing(followerId, followingId) {
     isFollowing(followerId, followingId, following => this.setState({ following }));
   }
 
+  getData(userId) {
+    getUserById(userId, user => this.store.dispatch({ type: UPDATE_FOCUSED_USER, user }) );
+    getQuestionsByUserId(userId, questions => this.store.dispatch({ type: SET_FOCUSED_USER_QUESTIONS, questions }));
+    this.checkFollowing(this.store.getState().currentUser.id, userId);
+  }
+
   render() {
 
     let userId = this.props.match.params.userId;
     if (userId != this.store.getState().focusedUser.id) {
-      getUserById(userId, user => this.store.dispatch({ type: UPDATE_FOCUSED_USER, user }) );
-      getQuestionsByUserId(userId, questions => this.store.dispatch({ type: SET_FOCUSED_USER_QUESTIONS, questions }));
-      this.checkFollowing(this.store.getState().currentUser.id, userId);
+      this.getData(userId);
     }
 
     return (
@@ -59,12 +66,14 @@ class UserProfileContainer extends Component {
           toggleModal={this.toggleModal}
           handleFollow={this.handleFollow}
           following={this.state.following}
+          isCurrentUser={this.store.getState().focusedUser.id === this.store.getState().currentUser.id}
         />
         <AskQuestionModal
           visible={this.state.modalVisible}
           toggleModal={this.toggleModal}
           asker={this.store.getState().currentUser}
           answerer={this.store.getState().focusedUser}
+          getData={this.getData}
         />
       </View>
     )
