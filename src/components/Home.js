@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Route, Link, Redirect } from 'react-router-native';
 
-import QuestionList from './QuestionList';
+import PendingQuestionList from './PendingQuestionList';
 
 const Home = ({ questions }) => {
   return (
     <View style={styles.container}>
-      <QuestionList questions={questions} />
+      <PendingQuestionList questions={questions} />
     </View>
   )
 }
