@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView, TouchableHighlight } from 'react-na
 import { Link } from 'react-router-native';
 
 import QuestionList from './QuestionList';
+import UserProfileButtons from './UserProfileButtons';
 import colors from '../util/colors';
 
 
@@ -25,24 +26,12 @@ const UserProfile = ({ user, questions, toggleModal, handleFollow, following, is
           <Text style={styles.username}>{user.name}</Text>
           <Text style={styles.bio}>{user.bio}</Text>
 
-          <View style={styles.buttonWrapper}>
-            <TouchableHighlight
-              style={[styles.button, styles.buttonPrimary]}
-              underlayColor={colors.primary}
-              onPress={toggleModal}
-            >
-              <Text style={styles.buttonPrimaryText}>Ask Question</Text>
-            </TouchableHighlight>
 
-            <TouchableHighlight
-              style={[styles.button, styles.buttonSecondary]}
-              underlayColor={'white'}
-              onPress={handleFollow}
-            >
-              <Text style={styles.buttonText}>{following ? 'Following' : 'Follow'}</Text>
-            </TouchableHighlight>
-          </View>
-
+          <UserProfileButtons
+            toggleModal={toggleModal}
+            handleFollow={handleFollow}
+            following={following}
+          />
 
         </View>
 
@@ -92,32 +81,5 @@ const styles = StyleSheet.create({
 
   },
 
-  button: {
-    width: '40%',
-    height: 30,
 
-    marginTop: 20,
-
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-
-  buttonPrimary: {
-    backgroundColor: colors.primary,
-  },
-
-  buttonSecondary: {
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: colors.midGrey,
-  },
-
-  buttonPrimaryText: {
-    color: 'white',
-  },
-
-  buttonText: {
-
-  },
 })
