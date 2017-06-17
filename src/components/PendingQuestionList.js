@@ -4,7 +4,7 @@ import { AppRegistry, StyleSheet, Text, View, ScrollView } from 'react-native';
 import UnansweredQuestion from './UnansweredQuestion';
 
 
-const QuestionList = ({ questions }) => {
+const PendingQuestionList = ({ questions }) => {
   return (
     <View style={styles.container}>
       { questions.map(question => {
@@ -17,10 +17,9 @@ const QuestionList = ({ questions }) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    // height: '100%',
     backgroundColor: 'white',
   }
 })
 
 
-export default QuestionList;
+export default PendingQuestionList;

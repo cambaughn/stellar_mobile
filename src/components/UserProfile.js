@@ -7,6 +7,7 @@ import UserProfileButtons from './UserProfileButtons';
 import colors from '../util/colors';
 
 
+
 const UserProfile = ({ user, questions, toggleModal, handleFollow, following, isCurrentUser }) => {
   if (isCurrentUser) {
     return (
