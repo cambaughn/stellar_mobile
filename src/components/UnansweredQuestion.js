@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import { NativeRouter, Route, Link, Redirect } from 'react-router-native';
 
+import colors from '../util/colors';
 
 const UnansweredQuestion = ({ question }) => {
   return (
     <View style={styles.container}>
-      {/* <Link to={`/user/${question.answerer.id}`} style={styles.link} underlayColor='white'>
-        <Text style={styles.bold}>{question.answerer.name}</Text>
-      </Link> */}
       <View style={styles.questionAsker}>
         <Link to={`/user/${question.asker.id}`} style={styles.link} underlayColor='white'>
           <Text style={styles.bold}>{question.asker.name}</Text>
@@ -16,7 +14,15 @@ const UnansweredQuestion = ({ question }) => {
         <Text> asks:</Text>
       </View>
 
-      <Text>{question.text}</Text>
+      <Text style={styles.questionText}>{question.text}</Text>
+
+      <Link to={{
+        pathname: `/record_answer/${question.id}`,
+        state: { question: question }
+      }}
+      >
+        <Text style={styles.replyText}>Reply</Text>
+      </Link>
     </View>
   )
 }
@@ -45,8 +51,16 @@ const styles = StyleSheet.create({
   },
 
   link: {
-    marginBottom: 10
+    marginBottom: 10,
   },
+
+  questionText: {
+    marginBottom: 10,
+  },
+
+  replyText: {
+    color: colors.midGrey,
+  }
 })
 
 export default UnansweredQuestion;
