@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Modal, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Modal, Dimensions, TouchableHighlight } from 'react-native';
 import { Link } from 'react-router-native';
 
 import Camera from 'react-native-camera';
+
+import colors from '../util/colors';
 
 class RecordAnswer extends Component {
 
@@ -32,8 +34,11 @@ class RecordAnswer extends Component {
                 this.camera = cam;
               }}
               style={styles.preview}
-              aspect={Camera.constants.Aspect.fill}>
-              <Text style={styles.capture} onPress={this.takePicture}>[CAPTURE]</Text>
+              aspect={Camera.constants.Aspect.fill}
+            >
+              <TouchableHighlight onPress={this.takePicture} underlayColor={colors.lightGrey} style={styles.capture}>
+                <View></View>
+              </TouchableHighlight>
             </Camera>
 
             {/* <Text>{this.props.match.params.questionId}</Text> */}
@@ -60,10 +65,10 @@ const styles = StyleSheet.create({
   },
   capture: {
     flex: 0,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    color: '#000',
-    padding: 10,
+    backgroundColor: 'white',
+    borderRadius: 100,
+    width: 50,
+    height: 50,
     margin: 40
   }
 })
