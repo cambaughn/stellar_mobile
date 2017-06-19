@@ -5,22 +5,44 @@ import { Link } from 'react-router-native';
 import Camera from 'react-native-camera';
 
 import colors from '../util/colors';
+import postAnswer from '../util/postAnswer';
 
 class RecordAnswer extends Component {
 
   constructor(props) {
     super(props);
 
-    this.takePicture = this.takePicture.bind(this);
+    this.state = {
+      videoInfo: {}
+    }
+
+    this.startRecording = this.startRecording.bind(this);
+    this.stopRecording = this.stopRecording.bind(this);
+
+    Camera.checkDeviceAuthorizationStatus().then(result => console.log(result))
   }
 
-  takePicture() {
-  this.camera.capture()
-    .then((data) => console.log(data))
+  startRecording() {
+    console.log('recording video')
+    this.camera.capture({
+      audio: true,
+      mode: Camera.constants.CaptureMode.video,
+      target: Camera.constants.CaptureTarget.disk
+    })
+    .then((video) => {
+      console.log(video)
+      postAnswer(video, response => this.setState({videoInfo: response }))
+    })
     .catch(err => console.error(err));
-}
+  }
+
+  stopRecording() {
+    console.log('stopping video')
+    this.camera.stopCapture();
+  }
 
   render() {
+    console.log(this.state.videoInfo)
     return (
       <View>
         <Modal
@@ -35,8 +57,16 @@ class RecordAnswer extends Component {
               }}
               style={styles.preview}
               aspect={Camera.constants.Aspect.fill}
+              captureMode={Camera.constants.CaptureMode.video}
+              captureAudio={true}
+              type={Camera.constants.Type.front}
             >
-              <TouchableHighlight onPress={this.takePicture} underlayColor={colors.lightGrey} style={styles.capture}>
+              <TouchableHighlight
+                onPressIn={this.startRecording}
+                onPressOut={this.stopRecording}
+                underlayColor={colors.lightGrey}
+                style={styles.capture}
+              >
                 <View></View>
               </TouchableHighlight>
             </Camera>
