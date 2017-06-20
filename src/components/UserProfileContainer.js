@@ -8,8 +8,7 @@ import AskQuestionModal from './AskQuestionModal';
 import { getUserById } from '../util/getUsers';
 import { getQuestionsByUserId } from '../util/getQuestions';
 import { follow, isFollowing } from '../util/follow';
-
-import { UPDATE_FOCUSED_USER, SET_FOCUSED_USER_QUESTIONS } from '../redux/actionTypes';
+import { updateFocusedUser, setFocusedUserQuestions } from '../redux/actionCreators';
 
 
 class UserProfileContainer extends Component {
@@ -46,8 +45,8 @@ class UserProfileContainer extends Component {
   }
 
   getData(userId) {
-    getUserById(userId, user => this.store.dispatch({ type: UPDATE_FOCUSED_USER, user }) );
-    getQuestionsByUserId(userId, questions => this.store.dispatch({ type: SET_FOCUSED_USER_QUESTIONS, questions }));
+    getUserById(userId, user => this.store.dispatch(updateFocusedUser(user)) );
+    getQuestionsByUserId(userId, questions => this.store.dispatch(setFocusedUserQuestions(questions)));
     this.checkFollowing(this.store.getState().currentUser.id, userId);
   }
 

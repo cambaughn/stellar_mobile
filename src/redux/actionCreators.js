@@ -1,3 +1,7 @@
+/*eslint no-use-before-define: "off"*/
+/*eslint no-unused-vars: "off"*/
+/*eslint-env es6*/
+
 import {
   UPDATE_USER,
   SET_QUESTIONS,
@@ -34,4 +38,11 @@ function updateFocusedUser(user) {
   }
 }
 
-export { setUsers, setQuestions, updateCurrentUser, updateFocusedUser };
+function setFocusedUserQuestions(questions) {
+  return {
+    type: SET_FOCUSED_USER_QUESTIONS,
+    questions
+  }
+}
+
+export { setUsers, setQuestions, updateCurrentUser, updateFocusedUser, setFocusedUserQuestions };
