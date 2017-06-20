@@ -52,8 +52,8 @@ class UserProfileContainer extends Component {
 
   render() {
 
-    let userId = this.props.match.params.userId;
-    if (userId != this.store.getState().focusedUser.id) {
+    let userId = +this.props.match.params.userId;
+    if (userId !== this.store.getState().focusedUser.id) {
       this.getData(userId);
     }
 
