@@ -7,7 +7,7 @@ const UserListItem = ({ user }) => {
   return (
     <View style={styles.container}>
       <Link to={`/user/${user.id}`} style={styles.link}>
-        <Text>{user.name}</Text>
+        <Text style={styles.name}>{user.name}</Text>
       </Link>
     </View>
   )
@@ -24,6 +24,11 @@ const styles = StyleSheet.create({
 
   bold: {
     fontWeight: 'bold',
+  },
+
+  name: {
+    fontWeight: '500',
+    fontSize: 18,
   },
 
   link: {

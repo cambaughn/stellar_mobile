@@ -21,63 +21,74 @@ class App extends Component {
 
   constructor(props) {
     super(props);
+
+    this.store = this.props.store;
     this.getUsers = this.getUsers.bind(this);
     this.props.store.subscribe(this.forceUpdate.bind(this))
   }
 
   loginRedirect() {
-    if (!this.store.getState().currentUser.name) {
-      console.log('redirecting')
+    console.log('checking login => ', this.store.getState().currentUser)
+    if (!this.store.getState().currentUser.id) {
+      console.log('redirecting to login');
       return <Redirect to='/login' />
     }
   }
 
   getUsers() {
-    return this.props.store.getState().users;
+    return this.store.getState().users;
   }
 
   getQuestions() {
-    return this.props.store.getState().questions;
+    return this.store.getState().questions;
   }
 
   getCurrentUser() {
-    return this.props.store.getState().currentUser;
+    return this.store.getState().currentUser;
   }
 
 
   componentDidMount() {
     getAllUsers(users => {
-      this.props.store.dispatch({ type: 'SET_USERS', users: users });
+      this.store.dispatch(setUsers(users));
     })
 
     getAllQuestions(questions => {
-      this.props.store.dispatch(setQuestions(questions));
+      this.store.dispatch(setQuestions(questions));
     })
   }
 
 
   render() {
-    return (
-      <NativeRouter>
-        <View style={styles.container}>
+    if (!this.store.getState().currentUser.id) {
+      return (
+        <View>
           <TopNav />
-          <Switch>
-            {/* <Route exact path='/' render={() => <Redirect to='/record_answer/2' /> }/> */}
-            <Route exact path='/' render={() => <Home questions={this.getQuestions()} /> }/>
-            <Route path='/search' render={() => <Search users={this.getUsers()} /> }/>
-
-            <Route path='/record_answer/:questionId' component={RecordAnswer} />
-
-            <Route path='/user/:userId' render={({ match }) =>  <UserProfileContainer match={match} store={this.props.store} /> } />
-
-            {/* <Route path='/login' component={Login} />
-            <Route path='/search' render={() => <UserList users={this.store.getState().users} /> }/>            */}
-          </Switch>
-
-          <BottomNav currentUser={this.getCurrentUser()}  />
+          <Login />
         </View>
-      </NativeRouter>
-    );
+      )
+    } else {
+      return (
+        <NativeRouter>
+          <View style={styles.container}>
+            <TopNav />
+            <Switch>
+              {/* <Route exact path='/' render={() => <Redirect to='/record_answer/2' /> }/> */}
+              <Route exact path='/' render={() => <Home questions={this.getQuestions()} /> }/>
+              <Route path='/search' render={() => <Search users={this.getUsers()} /> }/>
+
+              <Route path='/record_answer/:questionId' component={RecordAnswer} />
+
+              <Route path='/user/:userId' render={({ match }) =>  <UserProfileContainer match={match} store={this.store} /> } />
+
+              <Route path='/login' component={Login} />
+            </Switch>
+
+            <BottomNav currentUser={this.getCurrentUser()}  />
+          </View>
+        </NativeRouter>
+      );
+    }
   }
 }
 
