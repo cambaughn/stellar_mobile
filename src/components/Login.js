@@ -6,14 +6,40 @@ import LoginButtons from './LoginButtons';
 import LoginModal from './LoginModal';
 import stylePresets from '../util/stylePresets';
 
-const Login = () => {
-  return (
-    <View style={styles.container}>
-      {/* <Text>Log In or Sign up</Text> */}
-      <LoginButtons />
-      <LoginModal visible={false} />
-    </View>
-  )
+class Login extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      modalVisible: false,
+      mode: null
+    }
+
+    this.handlePress = this.handlePress.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+  }
+
+  handlePress(mode) {
+    this.setState({ mode }, this.toggleModal);
+  }
+
+  toggleModal() {
+    this.setState({modalVisible: !this.state.modalVisible })
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        {/* <Text>Log In or Sign up</Text> */}
+        <LoginButtons handlePress={this.handlePress} />
+        <LoginModal
+          visible={this.state.modalVisible}
+          toggleModal={this.toggleModal}
+          mode={this.state.mode}
+        />
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({

@@ -11,27 +11,29 @@ class LoginModal extends Component {
     super(props);
 
     this.state = {
-      text: ''
+      name: '',
+      email: '',
+      password: '',
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit() {
-    if (this.state.text.length > 3) {
-      let question = {
-        text: this.state.text,
-        askerId: this.props.asker.id,
-        answererId: this.props.answerer.id
+    if (this.state.name.length > 3) {
+      let user = {
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password
       }
-
-      postQuestion(question, question => {
-        this.setState({ text: '' })
-        this.props.getData(this.props.answerer.id)}
-      );
+      // post login
+      // postQuestion(question, question => {
+      //   this.setState({ text: '' })
+      //   this.props.getData(this.props.answerer.id)}
+      // );
 
       this.props.toggleModal();
-      console.log('submitting! => ', this.state.text);
+      console.log('submitting! => ', this.state.email);
     }
   }
 
@@ -46,17 +48,14 @@ class LoginModal extends Component {
             <View style={styles.container}>
               <View>
                 <TextInput
-                  multiline={true}
-                  numberOfLines={4}
                   style={styles.input}
-                  placeholder={`Ask a question`}
+                  placeholder={`Name`}
                   placeholderTextColor={colors.midGrey}
-                  autoCapitalize={'sentences'}
                   autoFocus={true}
-                  returnKeyType={'send'}
+                  returnKeyType={'next'}
 
-                  onChangeText={text => this.setState({ text })}
-                  value={this.state.text}
+                  onChangeText={name => this.setState({ name })}
+                  value={this.state.name}
                 />
 
                 <TouchableHighlight
@@ -79,7 +78,6 @@ class LoginModal extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    // marginTop: 50,
     height: '90%',
     width: '100%',
 
