@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight, Dimensions } from 'react-native';
 import { NativeRouter, Route, Link, Redirect } from 'react-router-native';
 
 import colors from '../util/colors';
@@ -34,10 +34,11 @@ const styles = StyleSheet.create({
 
     paddingTop: 20,
     paddingBottom: 20,
-    paddingLeft: 30,
 
     borderBottomWidth: 1,
     borderColor: '#ecf0f1',
+
+    width: Dimensions.get('window').width - 20,
   },
 
   questionAsker: {

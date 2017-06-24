@@ -51,18 +51,20 @@ export default UserProfile;
 const styles = StyleSheet.create({
   scrollView: {
     height: Dimensions.get("window").height - 99,
+    width: '100%'
   },
 
   container: {
     width: '100%',
 
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-start',
   },
 
   top: {
-    width: '80%',
+    width: Dimensions.get('window').width - 20,
     minHeight: 100,
 
     paddingTop: 20,
