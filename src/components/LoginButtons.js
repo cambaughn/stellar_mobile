@@ -10,15 +10,15 @@ const LoginButtons = ({ handlePress }) => {
       <TouchableHighlight
         style={[styles.button, styles.buttonPrimary]}
         underlayColor={colors.primary}
-        onPress={() => handlePress('signup')}
+        onPress={() => handlePress('Sign Up')}
       >
         <Text style={styles.buttonPrimaryText}>Sign Up</Text>
       </TouchableHighlight>
-
+      
       <TouchableHighlight
         style={[styles.button, styles.buttonSecondary]}
         underlayColor={'white'}
-        onPress={() => handlePress('login')}
+        onPress={() => handlePress('Log In')}
       >
         <Text style={styles.buttonText}>Log In</Text>
       </TouchableHighlight>

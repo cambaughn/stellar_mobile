@@ -46,27 +46,57 @@ class LoginModal extends Component {
             visible={this.props.visible}
           >
             <View style={styles.container}>
-              <View>
-                <TextInput
-                  style={styles.input}
-                  placeholder={`Name`}
-                  placeholderTextColor={colors.midGrey}
-                  autoFocus={true}
-                  returnKeyType={'next'}
+              <Text>{this.props.mode}</Text>
+              <View style={styles.inputsContainer}>
+                <View style={styles.inputWrapper}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder={`Name`}
+                    placeholderTextColor={colors.midGrey}
+                    autoFocus={true}
+                    autoCorrect={false}
+                    returnKeyType={'next'}
 
-                  onChangeText={name => this.setState({ name })}
-                  value={this.state.name}
-                />
+                    onChangeText={name => this.setState({ name })}
+                    value={this.state.name}
+                  />
+                </View>
 
-                <TouchableHighlight
-                  onPress={this.handleSubmit}
-                  style={styles.buttonPrimary}
-                  underlayColor={colors.primary}
-                >
-                  <Text style={styles.buttonPrimaryText}>Ask</Text>
-                </TouchableHighlight>
+                <View style={styles.inputWrapper}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder={`Email`}
+                    placeholderTextColor={colors.midGrey}
+                    autoCorrect={false}
+                    returnKeyType={'next'}
 
+                    onChangeText={email => this.setState({ email })}
+                    value={this.state.email}
+                  />
+                </View>
+
+                <View style={styles.inputWrapper}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder={`Password`}
+                    placeholderTextColor={colors.midGrey}
+                    autoCorrect={false}
+                    returnKeyType={'next'}
+
+                    onChangeText={password => this.setState({ password })}
+                    value={this.state.password}
+                  />
+                </View>
               </View>
+
+              <TouchableHighlight
+                onPress={this.handleSubmit}
+                style={styles.buttonPrimary}
+                underlayColor={colors.primary}
+              >
+                <Text style={styles.buttonPrimaryText}>Ask</Text>
+              </TouchableHighlight>
+
             </View>
           </Modal>
 
@@ -86,6 +116,19 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  inputsContainer: {
+    height: 150,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
+  inputWrapper: {
+    borderBottomWidth: 1,
+    borderBottomColor: colors.lightGrey,
   },
 
   input: {
