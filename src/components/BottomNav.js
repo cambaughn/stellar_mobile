@@ -9,13 +9,13 @@ import colors from '../util/colors';
 const BottomNav = ({ currentUser }) => {
   return (
     <View style={styles.container}>
-      <Link to='/' underlayColor='white'>
+      <Link to='/' underlayColor='white' style={styles.button}>
         <Text>Home</Text>
       </Link>
-      <Link to='/search' underlayColor='white'>
+      <Link to='/search' underlayColor='white' style={styles.button}>
         <Text>Search</Text>
       </Link>
-      <Link to={`/user/${currentUser.id}`} underlayColor='white'>
+      <Link to={`/user/${currentUser.id}`} underlayColor='white' style={styles.button}>
         <Text>Profile</Text>
       </Link>
     </View>
@@ -41,10 +41,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
 
-    paddingLeft: 40,
-    paddingRight: 40,
-
     zIndex: 1,
+  },
+
+  button: {
+    width: '33%',
+    height: '100%',
+
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 })
 

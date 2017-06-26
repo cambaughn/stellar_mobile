@@ -7,13 +7,13 @@ import Emoji from 'react-native-emoji';
 import PendingQuestionList from './PendingQuestionList';
 
 const Home = ({ questions }) => {
-  // if (questions.length) {
-  //   return (
-  //     <ScrollView style={styles.scrollView}>
-  //       <PendingQuestionList questions={questions} />
-  //     </ScrollView>
-  //   )
-  // } else {
+  if (questions.length) {
+    return (
+      <ScrollView style={styles.scrollView}>
+        <PendingQuestionList questions={questions} />
+      </ScrollView>
+    )
+  } else {
     return (
       <View style={styles.container}>
         <Text style={styles.bigText}>You're not following anyone yet</Text>
@@ -22,7 +22,7 @@ const Home = ({ questions }) => {
         </Link>
       </View>
     )
-  // }
+  }
 }
 
 const styles = StyleSheet.create({
