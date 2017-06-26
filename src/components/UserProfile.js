@@ -50,7 +50,7 @@ export default UserProfile;
 
 const styles = StyleSheet.create({
   scrollView: {
-    height: Dimensions.get("window").height - 99,
+    height: Dimensions.get("window").height - 109,
     width: '100%'
   },
 

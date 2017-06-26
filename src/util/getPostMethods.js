@@ -1,6 +1,8 @@
 
-const baseUrl = 'http://localhost:1337';
+let onDevice = false;
+const baseUrl = onDevice ? 'http://cambook.local:1337' : 'http://localhost:1337';
 
+console.log('REQUESTING => ', baseUrl)
 
 function get(path, callback) {
   fetch(`${baseUrl}${path}`)

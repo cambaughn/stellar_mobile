@@ -14,7 +14,7 @@ const LoginButtons = ({ handlePress }) => {
       >
         <Text style={styles.buttonPrimaryText}>Sign Up</Text>
       </TouchableHighlight>
-      
+
       <TouchableHighlight
         style={[styles.button, styles.buttonSecondary]}
         underlayColor={'white'}

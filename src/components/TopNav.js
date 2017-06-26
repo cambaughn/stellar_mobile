@@ -17,7 +17,7 @@ const TopNav = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 50,
+    height: 60,
     width: '100%',
 
     position: 'relative',
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   brand: {
     color: colors.primary,
     fontWeight: 'bold',
-    fontSize: 15,
+    fontSize: 18,
   }
 })
 
