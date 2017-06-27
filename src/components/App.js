@@ -14,7 +14,7 @@ import RecordAnswer from './RecordAnswer';
 
 import { getAllUsers } from '../util/getUsers';
 import { getAllQuestions } from '../util/getQuestions';
-import { setUsers, setQuestions } from '../redux/actionCreators';
+import { setUsers, setQuestions, updateCurrentUser } from '../redux/actionCreators';
 
 
 class App extends Component {
@@ -24,15 +24,8 @@ class App extends Component {
 
     this.store = this.props.store;
     this.getUsers = this.getUsers.bind(this);
+    this.setCurrentUser = this.setCurrentUser.bind(this);
     this.props.store.subscribe(this.forceUpdate.bind(this))
-  }
-
-  loginRedirect() {
-    console.log('checking login => ', this.store.getState().currentUser)
-    if (!this.store.getState().currentUser.id) {
-      console.log('redirecting to login');
-      return <Redirect to='/login' />
-    }
   }
 
   getUsers() {
@@ -45,6 +38,10 @@ class App extends Component {
 
   getCurrentUser() {
     return this.store.getState().currentUser;
+  }
+
+  setCurrentUser(user) {
+    this.store.dispatch(updateCurrentUser(user));
   }
 
 
@@ -64,7 +61,7 @@ class App extends Component {
       return (
         <View>
           <TopNav />
-          <Login />
+          <Login setCurrentUser={this.setCurrentUser} />
         </View>
       )
     } else {

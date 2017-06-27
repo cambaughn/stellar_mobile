@@ -18,6 +18,13 @@ class LoginModal extends Component {
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleLoggedIn = this.handleLoggedIn.bind(this)
+  }
+
+  handleLoggedIn(user) {
+    this.setState({ name: '', email: '', password: '' });
+    this.props.toggleModal();
+    this.props.setCurrentUser(user);
   }
 
   handleSubmit() {
@@ -29,22 +36,10 @@ class LoginModal extends Component {
       }
 
       if (this.props.mode === 'Sign Up') {
-        signup(user, user => {
-          this.setState({ name: '', email: '', password: '' });
-          console.log('SIGNING IN ', user)
-          this.props.toggleModal();
-          // this.props.setUser(user);
-        });
+        signup(user, this.handleLoggedIn);
       } else {
-        login(user, user => {
-          this.setState({ name: '', email: '', password: '' });
-          console.log('LOGGING IN ', user)
-          this.props.toggleModal();
-          // this.props.setUser(user);
-        });
+        login(user, this.handleLoggedIn);
       }
-
-      // this.props.toggleModal();
     }
   }
 

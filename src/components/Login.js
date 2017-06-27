@@ -15,6 +15,7 @@ class Login extends Component {
       mode: null
     }
 
+    this.store = this.props.store;
     this.handlePress = this.handlePress.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
   }
@@ -36,6 +37,7 @@ class Login extends Component {
           visible={this.state.modalVisible}
           toggleModal={this.toggleModal}
           mode={this.state.mode}
+          setCurrentUser={this.props.setCurrentUser}
         />
       </View>
     )
