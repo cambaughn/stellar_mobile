@@ -4,6 +4,7 @@ import { Link } from 'react-router-native';
 
 import { postQuestion } from '../util/postQuestion';
 import colors from '../util/colors';
+import { signup, login } from '../util/signInHelpers';
 
 class LoginModal extends Component {
 
@@ -20,20 +21,30 @@ class LoginModal extends Component {
   }
 
   handleSubmit() {
-    if (this.state.name.length > 3) {
+    if (this.state.email.length > 3) {
       let user = {
         name: this.state.name,
         email: this.state.email,
         password: this.state.password
       }
-      // post login
-      // postQuestion(question, question => {
-      //   this.setState({ text: '' })
-      //   this.props.getData(this.props.answerer.id)}
-      // );
 
-      this.props.toggleModal();
-      console.log('submitting! => ', this.state.email);
+      if (this.props.mode === 'Sign Up') {
+        signup(user, user => {
+          this.setState({ name: '', email: '', password: '' });
+          console.log('SIGNING IN ', user)
+          this.props.toggleModal();
+          // this.props.setUser(user);
+        });
+      } else {
+        login(user, user => {
+          this.setState({ name: '', email: '', password: '' });
+          console.log('LOGGING IN ', user)
+          this.props.toggleModal();
+          // this.props.setUser(user);
+        });
+      }
+
+      // this.props.toggleModal();
     }
   }
 
@@ -46,21 +57,25 @@ class LoginModal extends Component {
             visible={this.props.visible}
           >
             <View style={styles.container}>
-              <Text>{this.props.mode}</Text>
-              <View style={styles.inputsContainer}>
-                <View style={styles.inputWrapper}>
-                  <TextInput
-                    style={styles.input}
-                    placeholder={`Name`}
-                    placeholderTextColor={colors.midGrey}
-                    autoFocus={true}
-                    autoCorrect={false}
-                    returnKeyType={'next'}
+              <Text style={styles.header}>{this.props.mode}</Text>
 
-                    onChangeText={name => this.setState({ name })}
-                    value={this.state.name}
-                  />
-                </View>
+              <View style={styles.inputsContainer}>
+                { this.props.mode === 'Sign Up' &&
+
+                  <View style={styles.inputWrapper}>
+                    <TextInput
+                      style={styles.input}
+                      placeholder={`Name`}
+                      placeholderTextColor={colors.midGrey}
+                      autoFocus={true}
+                      autoCorrect={false}
+                      returnKeyType={'next'}
+
+                      onChangeText={name => this.setState({ name })}
+                      value={this.state.name}
+                    />
+                  </View>
+                }
 
                 <View style={styles.inputWrapper}>
                   <TextInput
@@ -69,6 +84,8 @@ class LoginModal extends Component {
                     placeholderTextColor={colors.midGrey}
                     autoCorrect={false}
                     returnKeyType={'next'}
+                    autoCapitalize={'none'}
+                    autoFocus={true}
 
                     onChangeText={email => this.setState({ email })}
                     value={this.state.email}
@@ -82,6 +99,8 @@ class LoginModal extends Component {
                     placeholderTextColor={colors.midGrey}
                     autoCorrect={false}
                     returnKeyType={'next'}
+                    autoCapitalize={'none'}
+                    secureTextEntry={true}
 
                     onChangeText={password => this.setState({ password })}
                     value={this.state.password}
@@ -116,6 +135,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  header: {
+    fontSize: 20,
+    fontWeight: '500',
+    marginBottom: 20,
   },
 
   inputsContainer: {

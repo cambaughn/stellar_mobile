@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height - 150,
 
     paddingTop: 30,
+    paddingRight: 30,
   },
 
   scrollView: {
